@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item android:duration="160">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="#6B7280"/>
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+            <item android:width="60dp" android:left="0dp">
+                <shape>
+                    <solid android:color="#FF5A4E"/>
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:duration="160">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="#6B7280"/>
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+            <item android:width="60dp" android:left="40dp">
+                <shape>
+                    <solid android:color="#FF5A4E"/>
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:duration="160">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="#6B7280"/>
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+            <item android:width="60dp" android:left="80dp">
+                <shape>
+                    <solid android:color="#FF5A4E"/>
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:duration="160">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="#6B7280"/>
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+            <item android:width="60dp" android:left="120dp">
+                <shape>
+                    <solid android:color="#FF5A4E"/>
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:duration="160">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="#6B7280"/>
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+            <item android:width="60dp" android:left="160dp">
+                <shape>
+                    <solid android:color="#FF5A4E"/>
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+</animation-list>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A3B7F8"
+    tools:context=".MainActivity">
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#2F3A5F"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Origami"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/AddMoreApps"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/ic_dashboard"
+
+            android:layout_gravity="start"
+            android:layout_marginEnd="16dp"/>
+        <ImageView
+            android:id="@+id/Buy"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/ic_crown"
+
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="16dp"/>
+        <ImageView
+            android:id="@+id/Settings"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/ic_settings"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"/>
+        <ImageView
+            android:id="@+id/Share"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/ic_share"
+            android:layout_gravity="end"
+            android:layout_marginEnd="25dp"/>
+
+
+    </com.google.android.material.appbar.MaterialToolbar>
+    <View
+        android:id="@+id/viewButton"
+        android:layout_width="match_parent"
+
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"/>
+    <ImageView
+        android:id="@+id/btnNew"
+        android:background="@drawable/bg_filter"
+        android:layout_margin="16dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Mới mẻ"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toTopOf="@id/btnNew"
+        app:layout_constraintStart_toStartOf="@id/btnNew"
+        app:layout_constraintEnd_toEndOf="@id/btnNew"
+        app:layout_constraintBottom_toBottomOf="@id/btnNew"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_new"
+        app:layout_constraintBottom_toTopOf="@id/tvNew"
+        app:layout_constraintStart_toStartOf="@id/btnNew"
+        app:layout_constraintEnd_toEndOf="@id/btnNew"
+        />
+    <ImageView
+        android:id="@+id/btnRefresh"
+        android:background="@drawable/bg_refresh"
+        android:layout_margin="16dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="ngẫu nhiên"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toTopOf="@id/btnRefresh"
+        app:layout_constraintStart_toStartOf="@id/btnRefresh"
+        app:layout_constraintEnd_toEndOf="@id/btnRefresh"
+        app:layout_constraintBottom_toBottomOf="@id/btnRefresh"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_refresh"
+        app:layout_constraintBottom_toTopOf="@id/tvRefresh"
+        app:layout_constraintStart_toStartOf="@id/btnRefresh"
+        app:layout_constraintEnd_toEndOf="@id/btnRefresh"
+        />
+    <ImageView
+        android:id="@+id/btnFavorite"
+        android:background="@drawable/bg_filter"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"
+        app:layout_constraintStart_toEndOf="@id/btnRefresh"
+        />
+
+    <TextView
+        android:id="@+id/tvFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Yêu Thích"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toTopOf="@id/btnFavorite"
+        app:layout_constraintStart_toStartOf="@id/btnFavorite"
+        app:layout_constraintEnd_toEndOf="@id/btnFavorite"
+        app:layout_constraintBottom_toBottomOf="@id/btnFavorite"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_favourite_fill"
+        app:layout_constraintBottom_toTopOf="@id/tvFavorite"
+        app:layout_constraintStart_toStartOf="@id/btnFavorite"
+        app:layout_constraintEnd_toEndOf="@id/btnFavorite"
+        />
+
+
+
+
+
+
+
+    <View
+        android:id="@+id/viewChude"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/viewButton"
+        android:layout_marginTop="30dp"
+        />
+    <TextView
+        android:id="@+id/tvChuDe"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="Chủ đề"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/viewChude"
+        app:layout_constraintStart_toStartOf="@id/viewChude"
+        app:layout_constraintEnd_toEndOf="@id/viewChude"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCategory"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tvChuDe"
+        app:layout_constraintBottom_toTopOf="@id/viewBottomBar"
+        />
+
+
+    <View
+        android:id="@+id/viewBottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/bg_bottom_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <ImageView
+        android:id="@+id/ivSmile"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/ic_smiley_face"
+        android:padding="12dp"
+        android:elevation="8dp"
+        app:layout_constraintTop_toTopOf="@id/viewBottomBar"
+        app:layout_constraintBottom_toBottomOf="@id/viewBottomBar"
+        app:layout_constraintStart_toStartOf="@id/viewBottomBar"
+        app:layout_constraintEnd_toEndOf="@id/viewBottomBar"
+        android:layout_marginBottom="24dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3F4A6B"
+
+
+    >
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#673AB7"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="16dp"/>
+
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cài đặt"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="50dp"
+                app:layout_constraintStart_toStartOf="@id/ivBack"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+    <View
+        android:id="@+id/viewRemoveAds"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+    <ImageView
+        android:id="@+id/ivCrown"
+        android:layout_marginStart="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_crown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewRemoveAds"
+        />
+    <TextView
+        android:id="@+id/tvCrown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gỡ quảng cáo"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@id/ivCrown"
+        app:layout_constraintTop_toBottomOf="@id/viewRemoveAds"/>
+
+    <View
+        android:id="@+id/viewAddMoreApp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@id/viewRemoveAds"/>
+    <ImageView
+        android:id="@+id/ivDashboard"
+        android:layout_marginStart="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_dashboard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewAddMoreApp"
+        />
+    <TextView
+        android:id="@+id/tvDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thêm nhiều ứng dụng"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@id/ivDashboard"
+        app:layout_constraintTop_toBottomOf="@id/viewAddMoreApp"/>
+
+    <View
+        android:id="@+id/viewWebsite"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@id/viewAddMoreApp"/>
+    <ImageView
+        android:id="@+id/ivWebsite"
+        android:layout_marginStart="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_dashboard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewWebsite"
+        />
+    <TextView
+        android:id="@+id/tvWebsite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trang mạng"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@id/ivWebsite"
+        app:layout_constraintTop_toBottomOf="@id/viewWebsite"/>
+
+    <View
+        android:id="@+id/viewShare"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toBottomOf="@id/viewWebsite"/>
+    <ImageView
+        android:id="@+id/ivShare"
+        android:layout_marginStart="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_share"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewShare"
+        />
+    <TextView
+        android:id="@+id/tvShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng lại"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@id/ivShare"
+        app:layout_constraintTop_toBottomOf="@id/viewShare"/>
+
+    <View
+        android:id="@+id/viewAppReview"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@id/viewShare"/>
+    <ImageView
+        android:id="@+id/ivAppReview"
+        android:layout_marginStart="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_new"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewAppReview"
+        />
+    <TextView
+        android:id="@+id/tvAppReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đánh giá ứng dụng"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@id/ivAppReview"
+        app:layout_constraintTop_toBottomOf="@id/viewAppReview"/>
+
+    <View
+        android:id="@+id/viewAppVersion"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toBottomOf="@id/viewAppReview"/>
+    <ImageView
+        android:id="@+id/ivAppVersion"
+        android:layout_marginStart="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_error"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewAppVersion"
+        />
+    <TextView
+        android:id="@+id/tvAppVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phiên bản ứng dụng"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@id/ivAppVersion"
+        app:layout_constraintTop_toBottomOf="@id/viewAppVersion"/>
+
+    <View
+        android:id="@+id/viewPrivacy"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@id/viewAppVersion"/>
+    <ImageView
+        android:id="@+id/ivPrivacy"
+        android:layout_marginStart="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_privacy_tip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewPrivacy"
+        />
+    <TextView
+        android:id="@+id/tvPrivacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chính sách bảo mật"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@id/ivPrivacy"
+        app:layout_constraintTop_toBottomOf="@id/viewPrivacy"/>
+
+
+    <View
+        android:id="@+id/viewBottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/bg_bottom_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <ImageView
+        android:id="@+id/ivSmile"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/ic_smiley_face"
+        android:padding="12dp"
+        android:elevation="8dp"
+        app:layout_constraintTop_toTopOf="@id/viewBottomBar"
+        app:layout_constraintBottom_toBottomOf="@id/viewBottomBar"
+        app:layout_constraintStart_toStartOf="@id/viewBottomBar"
+        app:layout_constraintEnd_toEndOf="@id/viewBottomBar"
+        android:layout_marginBottom="24dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
