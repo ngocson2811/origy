@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 class ProductViewModel (application: Application) : AndroidViewModel(application){
     private val dao = AppDatabase.get(application).ProductDao()
     private val itemDao = AppDatabase.get(application).ItemDetailDao()
-    val products = MutableLiveData<List<ProductEntity>>()
     val favorite = MutableLiveData<Boolean>()
     fun loadProduct(){
         viewModelScope.launch {
@@ -128,19 +127,17 @@ class ProductViewModel (application: Application) : AndroidViewModel(application
             }
         }
     }
-    fun load(productId: Int) {
-        viewModelScope.launch {
-            val data = dao.getByProduct(productId)
-            products.postValue(data)
-        }
+    fun getProducts(productId: Int): LiveData<List<ProductEntity>> {
+        return dao.getByProduct(productId)
     }
-    fun loadFavorite(itemId: Int){
+
+    fun loadFavorite(itemId: Int) {
         viewModelScope.launch {
             favorite.postValue(itemDao.isFavorite(itemId))
         }
     }
 
-    fun toggleFavorite(itemId: Int){
+    fun toggleFavorite(itemId: Int) {
         viewModelScope.launch {
             val current = itemDao.isFavorite(itemId)
             itemDao.updateFavorite(itemId, !current)

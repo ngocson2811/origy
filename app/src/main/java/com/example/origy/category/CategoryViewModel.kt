@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class CategoryViewModel(application: Application) : AndroidViewModel(application) {
     private val dao = AppDatabase.get(application).categoryDao()
-    val categories = MutableLiveData<List<CategoryEntity>>()
+    val categories = dao.getAll()
 
     fun loadData(){
         viewModelScope.launch {
@@ -34,7 +34,7 @@ class CategoryViewModel(application: Application) : AndroidViewModel(application
                 dao.insertAll(listCategory)
             }
 
-            categories.postValue(dao.getAll())
+
         }
     }
 }

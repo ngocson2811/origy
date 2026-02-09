@@ -28,6 +28,10 @@ class ProductDetail : AppCompatActivity() {
         setContentView(R.layout.activity_product_detail)
 
         val productId = intent.getIntExtra("productId", -1)
+        if (productId == -1) {
+            finish()
+            return
+        }
 
         val viewPager = findViewById<ViewPager2>(R.id.viewPager)
         val tvCount = findViewById<TextView>(R.id.tvCount)
@@ -52,10 +56,17 @@ class ProductDetail : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[ProductViewModel::class.java]
 
-        viewModel.products.observe(this) {
-            adapter.setData(it)
-            tvCount.text = "1/${it.size}"
-        }
+        viewModel.loadProduct()
+
+        viewModel.getProducts(productId)
+            .observe(this) { list ->
+
+                adapter.setData(list)
+
+                if (list.isNotEmpty()) {
+                    tvCount.text = "1/${list.size}"
+                }
+            }
 
         viewPager.registerOnPageChangeCallback(object :
             ViewPager2.OnPageChangeCallback() {
@@ -78,9 +89,7 @@ class ProductDetail : AppCompatActivity() {
             viewPager.setCurrentItem(0,true)
         }
 
-        viewModel.load(productId)
 
-        viewModel.loadProduct()
         viewModel.loadFavorite(productId)
         viewModel.favorite.observe(this){ fav ->
 
