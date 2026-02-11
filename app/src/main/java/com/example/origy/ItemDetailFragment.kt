@@ -28,12 +28,10 @@ class ItemDetailFragment : Fragment(R.layout.fragment_item_detail) {
 
         view.findViewById<TextView>(R.id.tvTitle).text = categoryName
 
-        // Back
         view.findViewById<ImageView>(R.id.ivBack).setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
-        // RecyclerView
         val recycler = view.findViewById<RecyclerView>(R.id.recyclerItemDetail)
         recycler.layoutManager = GridLayoutManager(requireContext(), 2)
 
