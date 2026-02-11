@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#4F5D7A"
-    tools:context=".SplashActivity">
+    tools:context=".SplashFragment">
     <TextView
         android:id="@+id/tvLoading"
         android:layout_width="wrap_content"

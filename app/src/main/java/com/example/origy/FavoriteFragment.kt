@@ -2,59 +2,70 @@ package com.example.origy
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.origy.favorite.FavotiteViewModel
 import com.example.origy.itemDetail.ItemDetailAdapter
-import com.example.origy.product.ProductViewModel
 import com.google.android.material.appbar.MaterialToolbar
 
-class FavoriteActivity : AppCompatActivity() {
+class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
+
     private lateinit var viewModel: FavotiteViewModel
     private lateinit var adapter: ItemDetailAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_favorite)
-        findViewById<ImageView>(R.id.ivBack).setOnClickListener {
-            finish()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Back
+        view.findViewById<ImageView>(R.id.ivBack).setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
-        val recycler = findViewById<RecyclerView>(R.id.recyclerFavorite)
+
+        // RecyclerView
+        val recycler = view.findViewById<RecyclerView>(R.id.recyclerFavorite)
+        recycler.layoutManager = GridLayoutManager(requireContext(), 2)
+
         adapter = ItemDetailAdapter { item ->
-            val intent = Intent(this, ProductDetail::class.java)
-            intent.putExtra("productId", item.id)
-            startActivity(intent)
+            // 👉 CHUYỂN SANG ProductDetailFragment
+            val fragment = ProductDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putInt("productId", item.id)
+                }
+            }
+
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit()
         }
-        recycler.layoutManager = GridLayoutManager(this, 2)
+
         recycler.adapter = adapter
 
+        // ViewModel
         viewModel = ViewModelProvider(this)[FavotiteViewModel::class.java]
 
-        viewModel.favorites.observe(this){
+        viewModel.favorites.observe(viewLifecycleOwner) {
             adapter.setData(it)
         }
 
         viewModel.loadFavorite()
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-
+        // Status bar inset
+        val toolbar = view.findViewById<MaterialToolbar>(R.id.toolbar)
         ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, insets ->
-
             val topInset = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
-
             val params = v.layoutParams as ViewGroup.MarginLayoutParams
             params.topMargin = topInset
             v.layoutParams = params
-
             insets
         }
     }
-
 }

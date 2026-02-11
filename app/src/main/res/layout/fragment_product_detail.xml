@@ -73,8 +73,8 @@
 
     <ImageView
         android:id="@+id/btnPrev"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/ic_prev"
         android:padding="8dp"
         app:layout_constraintStart_toStartOf="@id/viewPager"
@@ -84,8 +84,8 @@
 
     <ImageView
         android:id="@+id/btnNext"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/ic_next"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="@id/viewPager"
@@ -95,7 +95,7 @@
     <View
         android:id="@+id/viewBottomBar"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="55dp"
         android:background="@drawable/bg_bottom_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
