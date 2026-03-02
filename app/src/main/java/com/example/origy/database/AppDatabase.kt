@@ -4,18 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.origy.category.CategoryDao
-import com.example.origy.category.CategoryEntity
-import com.example.origy.itemDetail.ItemDetailDao
-import com.example.origy.itemDetail.ItemDetailEntity
-import com.example.origy.product.ProductDao
-import com.example.origy.product.ProductEntity
+import com.example.origy.ui.category.CategoryDao
+import com.example.origy.ui.category.CategoryEntity
+import com.example.origy.ui.itemDetail.ItemDetailDao
+import com.example.origy.ui.itemDetail.ItemDetailEntity
+import com.example.origy.ui.product.ProductDao
+import com.example.origy.ui.product.ProductEntity
 
 @Database(entities = [
     CategoryEntity:: class,
     ItemDetailEntity::class,
     ProductEntity::class
-                     ], version = 1, exportSchema = false)
+                     ], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun categoryDao() : CategoryDao
     abstract fun ItemDetailDao(): ItemDetailDao
