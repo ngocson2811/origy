@@ -34,6 +34,7 @@ class SplashFragment :
 
             (activity as? MainActivity)?.showBottomBar()
 
+
             navigateTo(HomeFragment())
         }
     }
