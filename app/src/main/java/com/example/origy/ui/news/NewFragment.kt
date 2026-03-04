@@ -1,6 +1,7 @@
 package com.example.origy.ui.news
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -12,25 +13,33 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.origy.ui.news.NewViewModel
 import com.example.origy.R
+import com.example.origy.base.BaseFragment
+import com.example.origy.databinding.FragmentAddMoreAppBinding
+import com.example.origy.databinding.FragmentNewBinding
 import com.example.origy.ui.itemDetail.ItemDetailAdapter
 import com.example.origy.ui.product.ProductDetailFragment
 import com.google.android.material.appbar.MaterialToolbar
 
-class NewFragment : Fragment(R.layout.fragment_new) {
+class NewFragment : BaseFragment<FragmentNewBinding>() {
 
     private lateinit var viewModel: NewViewModel
     private lateinit var adapter: ItemDetailAdapter
 
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentNewBinding {
+        return FragmentNewBinding.inflate(inflater,container,false)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        view.findViewById<ImageView>(R.id.ivBack).setOnClickListener {
+        binding.ivBack.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
-        val recycler = view.findViewById<RecyclerView>(R.id.recyclerNew)
-        recycler.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerNew.layoutManager = GridLayoutManager(requireContext(), 2)
 
         adapter = ItemDetailAdapter { item ->
 
@@ -40,13 +49,10 @@ class NewFragment : Fragment(R.layout.fragment_new) {
                 }
             }
 
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit()
+            navigateTo(fragment)
         }
 
-        recycler.adapter = adapter
+        binding.recyclerNew.adapter = adapter
 
 
         viewModel = ViewModelProvider(this)[NewViewModel::class.java]
@@ -58,15 +64,10 @@ class NewFragment : Fragment(R.layout.fragment_new) {
         viewModel.loadNew()
 
 
-        val toolbar = view.findViewById<MaterialToolbar>(R.id.toolbar)
-        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, insets ->
-            val topInset = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
-            val params = v.layoutParams as ViewGroup.MarginLayoutParams
-            params.topMargin = topInset
-            v.layoutParams = params
-            insets
-        }
+        setupToolbarInset(binding.toolbar)
     }
+
+
 
 
 }
