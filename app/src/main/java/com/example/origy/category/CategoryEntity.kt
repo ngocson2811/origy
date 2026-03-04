@@ -1,4 +1,4 @@
-package com.example.origy.ui.category
+package com.example.origy.category
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

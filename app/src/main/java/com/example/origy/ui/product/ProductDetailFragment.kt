@@ -1,102 +1,105 @@
 package com.example.origy.ui.product
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.origy.R
-import com.google.android.material.appbar.MaterialToolbar
+import com.example.origy.base.BaseFragment
+import com.example.origy.databinding.FragmentProductDetailBinding
 
-class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
+class ProductDetailFragment :
+    BaseFragment<FragmentProductDetailBinding>() {
 
     private lateinit var viewModel: ProductViewModel
     private lateinit var adapter: ProductAdapter
-    private lateinit var btnFavorite: ImageView
+
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentProductDetailBinding {
+        return FragmentProductDetailBinding.inflate(inflater, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val productId = arguments?.getInt("productId") ?: -1
         if (productId == -1) {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
+            goBack()
             return
-        }
-
-        val viewPager = view.findViewById<ViewPager2>(R.id.viewPager)
-        val tvCount = view.findViewById<TextView>(R.id.tvCount)
-        val btnPrev = view.findViewById<ImageView>(R.id.btnPrev)
-        val btnNext = view.findViewById<ImageView>(R.id.btnNext)
-        btnFavorite = view.findViewById(R.id.btnFavorite)
-
-        adapter = ProductAdapter()
-        viewPager.adapter = adapter
-        viewPager.isUserInputEnabled = false
-
-        btnNext.setOnClickListener {
-            if (viewPager.currentItem < adapter.itemCount - 1)
-                viewPager.currentItem++
-        }
-
-        btnPrev.setOnClickListener {
-            if (viewPager.currentItem > 0)
-                viewPager.currentItem--
         }
 
         viewModel = ViewModelProvider(this)[ProductViewModel::class.java]
 
+        setupViewPager()
+        setupClicks(productId)
+        observeData(productId)
+
+        setupToolbarInset(binding.topBar)
+    }
+
+    private fun setupViewPager() {
+        adapter = ProductAdapter()
+        binding.viewPager.adapter = adapter
+        binding.viewPager.isUserInputEnabled = false
+
+        binding.viewPager.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    binding.tvCount.text =
+                        "${position + 1}/${adapter.itemCount}"
+                }
+            }
+        )
+    }
+
+    private fun setupClicks(productId: Int) {
+
+        binding.btnNext.setOnClickListener {
+            if (binding.viewPager.currentItem < adapter.itemCount - 1)
+                binding.viewPager.currentItem++
+        }
+
+        binding.btnPrev.setOnClickListener {
+            if (binding.viewPager.currentItem > 0)
+                binding.viewPager.currentItem--
+        }
+
+        binding.btnBack.setOnClickListener {
+            goBack()
+        }
+
+        binding.btnReload.setOnClickListener {
+            binding.viewPager.setCurrentItem(0, true)
+        }
+
+        binding.btnFavorite.setOnClickListener {
+            viewModel.toggleFavorite(productId)
+        }
+    }
+
+    private fun observeData(productId: Int) {
+
         viewModel.loadProduct()
-        viewModel.getProducts(productId).observe(viewLifecycleOwner) {
-            adapter.setData(it)
-            if (it.isNotEmpty()) {
-                tvCount.text = "1/${it.size}"
+
+        viewModel.getProducts(productId)
+            .observe(viewLifecycleOwner) { list ->
+                adapter.setData(list)
+                if (list.isNotEmpty()) {
+                    binding.tvCount.text = "1/${list.size}"
+                }
             }
-        }
-
-        viewPager.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                tvCount.text = "${position + 1}/${adapter.itemCount}"
-            }
-        })
-
-        view.findViewById<ImageView>(R.id.btnBack).setOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
-
-        view.findViewById<ImageView>(R.id.btnReload).setOnClickListener {
-            viewPager.setCurrentItem(0, true)
-        }
 
         viewModel.loadFavorite(productId)
+
         viewModel.favorite.observe(viewLifecycleOwner) { fav ->
-            btnFavorite.setImageResource(
+            binding.btnFavorite.setImageResource(
                 if (fav) R.drawable.ic_favourite_fill
                 else R.drawable.ic_favourite
             )
-        }
-
-        btnFavorite.setOnClickListener {
-            viewModel.toggleFavorite(productId)
-        }
-
-        val topBar = view.findViewById<MaterialToolbar>(R.id.topBar)
-
-        ViewCompat.setOnApplyWindowInsetsListener(topBar) { v, insets ->
-
-            val statusBarHeight =
-                insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
-
-            val params = v.layoutParams as ViewGroup.MarginLayoutParams
-            params.topMargin = statusBarHeight
-            v.layoutParams = params
-
-            insets
         }
     }
 }

@@ -9,12 +9,11 @@ import com.example.origy.ui.itemDetail.ItemDetailEntity
 import kotlinx.coroutines.launch
 
 
-class FavotiteViewModel (application: Application) : AndroidViewModel(application){
+class FavoriteViewModel (application: Application) : AndroidViewModel(application){
     private val dao = AppDatabase.get(application).ItemDetailDao()
 
     val favorites = MutableLiveData<List<ItemDetailEntity>>()
 
-    val favorite = MutableLiveData<Boolean>()
 
     fun loadFavorite() {
         viewModelScope.launch {

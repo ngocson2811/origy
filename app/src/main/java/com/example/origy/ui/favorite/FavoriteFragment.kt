@@ -1,68 +1,68 @@
 package com.example.origy.ui.favorite
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.origy.R
+import com.example.origy.base.BaseFragment
+import com.example.origy.databinding.FragmentFavoriteBinding
 import com.example.origy.ui.itemDetail.ItemDetailAdapter
 import com.example.origy.ui.product.ProductDetailFragment
-import com.google.android.material.appbar.MaterialToolbar
 
-class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
+class FavoriteFragment :
+    BaseFragment<FragmentFavoriteBinding>() {
 
-    private lateinit var viewModel: FavotiteViewModel
+    private lateinit var viewModel: FavoriteViewModel
     private lateinit var adapter: ItemDetailAdapter
+
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentFavoriteBinding {
+        return FragmentFavoriteBinding.inflate(inflater, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
 
-        view.findViewById<ImageView>(R.id.ivBack).setOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
+        setupRecycler()
+        setupClickEvents()
+        observeData()
 
+        setupToolbarInset(binding.toolbar)
+    }
 
-        val recycler = view.findViewById<RecyclerView>(R.id.recyclerFavorite)
-        recycler.layoutManager = GridLayoutManager(requireContext(), 2)
+    private fun setupRecycler() {
+        binding.recyclerFavorite.layoutManager =
+            GridLayoutManager(requireContext(), 2)
 
         adapter = ItemDetailAdapter { item ->
-
             val fragment = ProductDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt("productId", item.id)
                 }
             }
-
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit()
+            navigateTo(fragment)
         }
 
-        recycler.adapter = adapter
+        binding.recyclerFavorite.adapter = adapter
+    }
 
-        viewModel = ViewModelProvider(this)[FavotiteViewModel::class.java]
+    private fun setupClickEvents() {
+        binding.ivBack.setOnClickListener {
+            goBack()
+        }
+    }
 
+    private fun observeData() {
         viewModel.favorites.observe(viewLifecycleOwner) {
             adapter.setData(it)
         }
 
         viewModel.loadFavorite()
-
-        val toolbar = view.findViewById<MaterialToolbar>(R.id.toolbar)
-        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, insets ->
-            val topInset = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
-            val params = v.layoutParams as ViewGroup.MarginLayoutParams
-            params.topMargin = topInset
-            v.layoutParams = params
-            insets
-        }
     }
 }

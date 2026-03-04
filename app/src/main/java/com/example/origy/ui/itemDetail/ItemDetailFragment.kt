@@ -1,6 +1,7 @@
 package com.example.origy.ui.itemDetail
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -13,12 +14,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.origy.ui.product.ProductDetailFragment
 import com.example.origy.R
+import com.example.origy.base.BaseFragment
+import com.example.origy.databinding.FragmentItemDetailBinding
 import com.google.android.material.appbar.MaterialToolbar
 
-class ItemDetailFragment : Fragment(R.layout.fragment_item_detail) {
+class ItemDetailFragment : BaseFragment<FragmentItemDetailBinding>() {
 
     private lateinit var viewModel: ItemDetailViewModel
     private lateinit var adapter: ItemDetailAdapter
+
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentItemDetailBinding {
+        return FragmentItemDetailBinding.inflate(inflater,container,false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,14 +36,13 @@ class ItemDetailFragment : Fragment(R.layout.fragment_item_detail) {
         val categoryName = arguments?.getString("CATEGORY_NAME")
         val categoryId = arguments?.getInt("categoryId") ?: 0
 
-        view.findViewById<TextView>(R.id.tvTitle).text = categoryName
+        binding.tvTitle.text = categoryName
 
-        view.findViewById<ImageView>(R.id.ivBack).setOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
+        binding.ivBack.setOnClickListener {
+            goBack()
         }
+        binding.recyclerItemDetail.layoutManager = GridLayoutManager(requireContext(),2)
 
-        val recycler = view.findViewById<RecyclerView>(R.id.recyclerItemDetail)
-        recycler.layoutManager = GridLayoutManager(requireContext(), 2)
 
         adapter = ItemDetailAdapter { product ->
             val fragment = ProductDetailFragment().apply {
@@ -42,12 +51,9 @@ class ItemDetailFragment : Fragment(R.layout.fragment_item_detail) {
                 }
             }
 
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit()
+            navigateTo(fragment)
         }
-        recycler.adapter = adapter
+        binding.recyclerItemDetail.adapter = adapter
 
         viewModel = ViewModelProvider(this)[ItemDetailViewModel::class.java]
 
@@ -57,13 +63,8 @@ class ItemDetailFragment : Fragment(R.layout.fragment_item_detail) {
 
         viewModel.seedProduct()
 
-        val toolbar = view.findViewById<MaterialToolbar>(R.id.toolbar)
-        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, insets ->
-            val topInset = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
-            val params = v.layoutParams as ViewGroup.MarginLayoutParams
-            params.topMargin = topInset
-            v.layoutParams = params
-            insets
-        }
+        setupToolbarInset(binding.toolbar)
     }
+
+
 }
