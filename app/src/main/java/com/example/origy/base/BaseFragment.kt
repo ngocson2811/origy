@@ -19,7 +19,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     abstract fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): VB
+    ) :VB
 
     override fun onCreateView(
         inflater: LayoutInflater,
