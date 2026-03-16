@@ -56,6 +56,6 @@ class ItemDetailAdapter (
         val img: ImageView = view.findViewById(R.id.img)
         val name: TextView = view.findViewById(R.id.tvName)
         val imgNew: ImageView = view.findViewById(R.id.imgNew)
-        val imgFavorite: ImageView = view.findViewById(R.id.imgfavorite)
+        val imgFavorite: ImageView = view.findViewById(R.id.imgFavorite)
     }
 }

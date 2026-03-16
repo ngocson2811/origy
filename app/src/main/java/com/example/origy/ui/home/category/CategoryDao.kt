@@ -1,4 +1,4 @@
-package com.example.origy.category
+package com.example.origy.ui.home.category
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

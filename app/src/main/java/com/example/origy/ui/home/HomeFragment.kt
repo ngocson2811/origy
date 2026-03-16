@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.origy.base.BaseFragment
 import com.example.origy.databinding.FragmentHomeBinding
 import com.example.origy.ui.addMoreApp.AddMoreAppFragment
-import com.example.origy.category.CategoryAdapter
-import com.example.origy.category.CategoryViewModel
+import com.example.origy.ui.home.category.CategoryAdapter
+import com.example.origy.ui.home.category.CategoryViewModel
 import com.example.origy.ui.favorite.FavoriteFragment
 import com.example.origy.ui.itemDetail.ItemDetailFragment
 import com.example.origy.ui.itemDetail.ItemDetailViewModel
@@ -37,8 +37,7 @@ class HomeFragment :
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this)[CategoryViewModel::class.java]
-        itemDetailViewModel =
-            ViewModelProvider(this)[ItemDetailViewModel::class.java]
+        itemDetailViewModel = ViewModelProvider(this)[ItemDetailViewModel::class.java]
 
         setupRecycler()
         setupClickEvents()
