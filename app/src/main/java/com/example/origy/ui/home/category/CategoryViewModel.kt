@@ -5,15 +5,16 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.origy.database.AppDatabase
 import com.example.origy.R
+import com.example.origy.base.viewModel.BaseViewModel
 import kotlinx.coroutines.launch
 
 
-class CategoryViewModel(application: Application) : AndroidViewModel(application) {
+class CategoryViewModel(application: Application) : BaseViewModel(application) {
     private val dao = AppDatabase.get(application).categoryDao()
     val categories = dao.getAll()
 
     fun loadData() {
-        viewModelScope.launch {
+        launch {
             getCategories().forEach {
                 dao.insert(it)
             }

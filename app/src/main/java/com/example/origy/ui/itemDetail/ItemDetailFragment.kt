@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.origy.ui.product.ProductDetailFragment
 import com.example.origy.R
-import com.example.origy.base.BaseFragment
+import com.example.origy.base.fragment.BaseFragment
 import com.example.origy.databinding.FragmentItemDetailBinding
 import com.google.android.material.appbar.MaterialToolbar
 

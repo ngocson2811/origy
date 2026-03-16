@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.origy.R
-import com.example.origy.base.BaseFragment
+import com.example.origy.base.fragment.BaseFragment
 import com.example.origy.databinding.FragmentProductDetailBinding
 
 class ProductDetailFragment :

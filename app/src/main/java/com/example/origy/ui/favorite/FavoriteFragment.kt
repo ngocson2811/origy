@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.origy.base.BaseFragment
+import com.example.origy.base.fragment.BaseFragment
 import com.example.origy.databinding.FragmentFavoriteBinding
 import com.example.origy.ui.itemDetail.ItemDetailAdapter
 import com.example.origy.ui.product.ProductDetailFragment

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.example.origy.MainActivity
-import com.example.origy.base.BaseFragment
+import com.example.origy.base.fragment.BaseFragment
 import com.example.origy.databinding.FragmentSplashBinding
 import com.example.origy.ui.home.HomeFragment
 import kotlinx.coroutines.delay

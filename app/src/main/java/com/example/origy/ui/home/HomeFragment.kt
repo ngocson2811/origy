@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.origy.base.BaseFragment
+import com.example.origy.base.fragment.BaseFragment
 import com.example.origy.databinding.FragmentHomeBinding
 import com.example.origy.ui.addMoreApp.AddMoreAppFragment
 import com.example.origy.ui.home.category.CategoryAdapter
@@ -18,6 +19,7 @@ import com.example.origy.ui.itemDetail.ItemDetailViewModel
 import com.example.origy.ui.news.NewFragment
 import com.example.origy.ui.product.ProductDetailFragment
 import com.example.origy.ui.setting.SettingFragment
+import kotlinx.coroutines.launch
 
 class HomeFragment :
     BaseFragment<FragmentHomeBinding>() {
@@ -89,15 +91,19 @@ class HomeFragment :
         }
 
         binding.btnRefresh.setOnClickListener {
-            itemDetailViewModel.getRandomProduct()
-                .observe(viewLifecycleOwner) { product ->
-                    val fragment = ProductDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putInt("productId", product.id)
-                        }
+
+            lifecycleScope.launch {
+
+                val product = itemDetailViewModel.getRandomProduct()
+
+                val fragment = ProductDetailFragment().apply {
+                    arguments = Bundle().apply {
+                        putInt("productId", product.id)
                     }
-                    navigateTo(fragment)
                 }
+
+                navigateTo(fragment)
+            }
         }
 
         binding.Share.setOnClickListener {

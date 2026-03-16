@@ -7,23 +7,22 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.origy.database.AppDatabase
 import com.example.origy.R
+import com.example.origy.base.viewModel.BaseViewModel
 import kotlinx.coroutines.launch
 
 
-class ItemDetailViewModel(application: Application) : AndroidViewModel(application) {
+class ItemDetailViewModel(application: Application) : BaseViewModel(application) {
     private val dao = AppDatabase.get(application).ItemDetailDao()
     fun getItems(categoryId: Int): LiveData<List<ItemDetailEntity>> {
         return dao.getByCategory(categoryId)
     }
     fun seedProduct() {
-        viewModelScope.launch {
+        launch {
 
             val seedIds = seedItems.map { it.id }
 
             seedItems.forEach { item ->
-                val exists = dao.exists(item.id) > 0
-
-                if (!exists) {
+                if (dao.exists(item.id) == 0) {
                     dao.insert(item)
                 } else {
                     dao.updateSeedData(
@@ -38,6 +37,9 @@ class ItemDetailViewModel(application: Application) : AndroidViewModel(applicati
             dao.deleteItemsNotIn(seedIds)
         }
     }
+
+    suspend fun getRandomProduct()= dao.getRandomProduct()
+
 
 
     private val seedItems = listOf(
@@ -58,9 +60,7 @@ class ItemDetailViewModel(application: Application) : AndroidViewModel(applicati
 
 
 
-    fun getRandomProduct(): LiveData<ItemDetailEntity> = liveData {
-        emit(dao.getRandomProduct())
-    }
+
 
 
 

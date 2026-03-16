@@ -6,18 +6,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.origy.R
+import com.example.origy.base.viewModel.BaseViewModel
 import com.example.origy.database.AppDatabase
 import kotlinx.coroutines.launch
 
 
-class ProductViewModel (application: Application) : AndroidViewModel(application){
+class ProductViewModel (application: Application) : BaseViewModel(application){
     private val dao = AppDatabase.get(application).ProductDao()
     private val itemDao = AppDatabase.get(application).ItemDetailDao()
     val favorite = MutableLiveData<Boolean>()
 
     fun loadProduct() {
-        viewModelScope.launch {
-
+        launch {
             val newData = getProduct()
             val oldData = dao.getAll()
 
